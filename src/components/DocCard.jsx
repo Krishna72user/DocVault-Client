@@ -1,4 +1,4 @@
-import React,{useEffect, useRef, useState} from 'react'
+import React,{ useRef, useState} from 'react'
 import { easeInOut, motion } from "motion/react"
 import { MdDelete } from "react-icons/md";
 import axios from 'axios';
@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { DocContext } from '../context/ContextProvider';
 import newTab from '../assets/new-tab.ico'
 const DocCard = (props) => {
+  const [status,setStatus] = useState(false)
   const {getImages}= useContext(DocContext)
   const {url,title} = props;
   const containerRef = useRef(null);
@@ -43,7 +44,9 @@ const DocCard = (props) => {
       getImages()
     }
   }
-  
+  const handleClick = ()=>{
+    setStatus(!status)
+  }
   return (
     <motion.div
     ref={containerRef} 
@@ -58,7 +61,7 @@ const DocCard = (props) => {
     className='bg-gray-300/10 h-[17em] overflow-hidden shadow-gray-500 shadow-2xl relative rounded-4xl w-[13em]'>
       <img src={url}  className='rounded-4xl h-[17em] w-full'  alt={title} />
         <motion.div 
-        initial={{opacity:0,y:20}}
+        initial={{opacity: 0,y:20}}
         whileHover={{
           opacity:1,
           y:0,
@@ -67,6 +70,8 @@ const DocCard = (props) => {
           opacity:1,
           y:0,
         }}
+        animate={{opacity:status?1:0,y:status?0:20}}
+        onClick={handleClick}
         transition={{
           duration:0.5,
           ease:easeInOut

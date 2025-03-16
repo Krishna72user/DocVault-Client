@@ -6,8 +6,8 @@ const Home = () => {
     const {images} = useContext(DocContext)
     return (
         <>
-            <div className=' relative'>
-                <div className=' font-bold text-[7em] h-full bg-gray-300 justify-center w-full flex fixed text-center -z-10'>
+            <div className='-z-10 relative'>
+                <div className=' font-bold text-[7em] h-full  justify-center w-full flex fixed text-center -z-10'>
                     <div className='absolute top-[40vh]'>Docs.</div>
                     <div className='absolute text-2xl top-[5em] '>Documents.</div>
                 </div>

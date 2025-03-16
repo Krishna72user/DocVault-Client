@@ -39,7 +39,7 @@ const Login = () => {
     }
   })
   return (
-    <div className='h-screen flex justify-center  bg-gray-300'>
+    <div className='h-screen flex justify-center  '>
         <div className='flex flex-col gap-5 justify-center items-center fixed top-[10em] rounded-2xl p-6 shadow-2xl bg-white w-[70vw] md:w-[30vw]'>
           <div className='text-2xl font-bold'>Welcome</div>
           <div className='px-2 py-2 text-center text-2xl font-bold bg-black/90 rounded w-[40px] text-white'>A</div>
