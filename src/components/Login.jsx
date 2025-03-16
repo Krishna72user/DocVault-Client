@@ -6,8 +6,10 @@ import { FaEyeSlash } from "react-icons/fa";
 import {useNavigate} from 'react-router-dom'
 import { useContext } from 'react';
 import { DocContext } from '../context/ContextProvider';
+import {ScaleLoader} from 'react-spinners'
 import axios from 'axios';
 const Login = () => {
+  const [loader,setLoader] = useState(false)
   const {getName,getImages} = useContext(DocContext)
   const email = useRef(null)
   const [log,setLog] =useState(null)
@@ -16,6 +18,7 @@ const Login = () => {
   const pass = useRef(null)
   const handleSubmit = useCallback(async (e)=>{
     e.preventDefault()
+    setLoader(true)
     try {
       const res = await axios.post(`${import.meta.env.VITE_HOST}/api/auth/login`,{
         email:email.current.value,
@@ -26,6 +29,7 @@ const Login = () => {
         localStorage.setItem('authtoken',res.data.token)
         getName()
         getImages()
+        setLoader(false)
       }
     } catch (error) {
       console.log(error.response.data.error)
@@ -51,7 +55,8 @@ const Login = () => {
            {log && <div className='text-sm text-red-500 mt-3  font-medium'>**{log} </div>}
 
            </div>
-            <button className='bg-gradient-to-r from-blue-400 to-violet-500 font-bold mt-3 px-15 py-2 rounded-3xl text-white ' type='submit'>Login</button>
+           {!loader && <button className='bg-gradient-to-r from-blue-400 to-violet-500 font-bold mt-3 px-15 py-2 rounded-3xl text-white ' type='submit'>Login</button>}
+           {loader &&  <ScaleLoader className='mt-6' color="#3ca0e5" />}
           </form>
           <div className='text-gray-600'>
             Don't have a account ?
