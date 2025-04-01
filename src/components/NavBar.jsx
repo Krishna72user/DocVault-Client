@@ -9,8 +9,12 @@ import { FaFileUpload } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import { FiUserPlus } from "react-icons/fi";
 import safe from '../assets/safebox.png'
+import {DocContext} from '../context/ContextProvider.jsx'
+import { useContext } from 'react';
 const NavBar = () => {
+  const {setImages} = useContext(DocContext)
   const [status,setStatus] = useState(false)
+
   const handleClick = ()=>{
     if(status){
       setStatus(false)
@@ -54,6 +58,7 @@ const NavBar = () => {
         end><IoIosLogIn className=' h-7 w-7'/> Login <IoIosLogIn className={` h-7 w-7 ${status?"opacity-0":"opacity-100"} ml-13`}/> </NavLink>}
            {localStorage.getItem('authtoken') && <NavLink to='/login' onClick={()=>{
              localStorage.removeItem('authtoken')
+             setImages([])
              localStorage.removeItem('name')}}
              className={({ isActive }) =>
               ` flex gap-3  ${isActive ? "text-blue-500" : "text-black"}`
